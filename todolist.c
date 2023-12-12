@@ -10,8 +10,10 @@ Data do Término:
 
 
 int main(){
-
-
-
+    initscr(); //inicia o modo curses
+    raw(); //teclas de controle não geram sinais de interrupção, diferente do cbreak() onde elas geram.
+    printw("Teste");
+    refresh(); //passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
+    endwin();  //finaliza o modo curses
   return 0;
 }
