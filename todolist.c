@@ -22,6 +22,8 @@ int main()
   noecho();
   getmaxyx(stdscr, ymax, xmax);
 
+  printw("X: %d e Y: %d", xmax, ymax); //usa pra saber o tamanho total do terminal (varia)
+
   mvprintw((ymax/4), (xmax/2), "Insira a logo aqui");
   printw("Fazer Cadastro");
   printw("Feito por: Gabriel Santana e Natanael Lima");
