@@ -36,7 +36,7 @@ int main()
 
   refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
   getch();
-  endwin(); // finaliza o modo curses
+  endwin(); // finaliza o modo curses.
 
   return 0;
 
