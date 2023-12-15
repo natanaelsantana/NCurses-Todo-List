@@ -22,13 +22,22 @@ int main()
   noecho();
   getmaxyx(stdscr, ymax, xmax);
 
-  mvprintw((ymax/4), (xmax/2), "Insira a logo aqui");
-  printw("Fazer Cadastro");
-  printw("Feito por: Gabriel Santana e Natanael Lima");
+  //printw("x: %d y: %d", xmax, ymax);
+
+  //newwin(7, (xmax - 6), (ymax - 9), 3);
+
+  WINDOW * janela = newwin(7, (xmax - 6), (ymax - 9), 3);
+
+  mvprintw((ymax/8), (xmax/2.25), "Insira a logo aqui");
+  mvprintw((ymax/2),(xmax/2.25),"Fazer Cadastro\n");
+  mvprintw((ymax/2) + 1.5,(xmax/2.25), "Sobre o projeto");
+  mvprintw((ymax-2), (xmax/18),"Sair");
+  mvprintw((ymax-2),(xmax/1.3),"Feito por: Gabriel Santana e Natanael Lima");
 
   refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
   getch();
   endwin(); // finaliza o modo curses
 
   return 0;
+
 }
