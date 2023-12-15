@@ -34,6 +34,7 @@ int main()
   mvprintw((ymax-2), (xmax/18),"Sair");
   mvprintw((ymax-2),(xmax/1.3),"Feito por: Gabriel Santana e Natanael Lima");
 
+
   refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
   getch();
   endwin(); // finaliza o modo curses.
