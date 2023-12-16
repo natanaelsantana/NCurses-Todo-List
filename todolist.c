@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "ncurses.h"
+#include "Logos.h"
 
 /*
 Projeto feito por: Gabriel Santana e Natanael Lima
@@ -13,32 +14,38 @@ Data do Término:
   ./testes.x
 */
 
+
 int main()
 {
 
-  int xmax, ymax;
-  initscr();    // inicia o modo curses
-  cbreak();     // teclas de controle geram sinais de interrupção, diferente do raw() onde elas n geram.
-  noecho();
-  getmaxyx(stdscr, ymax, xmax);
+    int xmaxstdscr, ymaxstdscr;
 
-    WINDOW * janela = newwin(4, 20, (ymax/2.1), (xmax/2.3)); // newwin(altura,largura (colunas), coordenada y em relação a stdscr, coordenada x em relaçãoa stdscr)
-    //mvwprintw(janela, (ymax) , (xmax), "zzz");  testar pq a janela não fecha
-    box(janela, 0, 0);
+    initscr(); // inicia o modo curses
+    cbreak();  // teclas de controle geram sinais de interrupção, diferente do raw() onde elas n geram.
+    noecho();
+    getmaxyx(stdscr, ymaxstdscr, xmaxstdscr);
+
+    WINDOW *janelaEscolhas = newwin(5, 22, (ymaxstdscr / 2.1), (xmaxstdscr / 2.3)); // newwin(altura,largura (colunas), coordenada y em relação a stdscr, coordenada x em relaçãoa stdscr)
+    box(janelaEscolhas, 0, 0);
     refresh();
-    wrefresh(janela);
 
-  mvprintw((ymax/8), (xmax/2.25), "Insira a logo aqui");
-  mvprintw((ymax/2),(xmax/2.25),"Fazer Cadastro\n");
-  mvprintw((ymax/2) + 1.5,(xmax/2.25), "Sobre o projeto");
-  mvprintw((ymax-2), (xmax/18),"Sair");
-  mvprintw((ymax-2),(xmax/1.3),"Feito por: Gabriel Santana e Natanael Lima");
+    WINDOW *janelaLogo = newwin(7,50,(ymaxstdscr / 8),(xmaxstdscr / 2.6));
+    refresh();
 
+    wprintw(janelaLogo, logoMenu);
+    mvwprintw(janelaEscolhas, 1, 1, "Sign up");
+    mvwprintw(janelaEscolhas, 2, 1, "Sign in");
+    mvwprintw(janelaEscolhas, 3, 1, "About the project");
+    mvwprintw(stdscr, (ymaxstdscr - 2), (xmaxstdscr / 18), "Exit");
+    mvwprintw(stdscr, (ymaxstdscr - 2), (xmaxstdscr / 1.3), "Made by: Gabriel Santana and Natanael Lima");
 
-  refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
-  getch();   //espera entrada do usuário
-  endwin(); // finaliza o modo curses.
+    wrefresh(janelaEscolhas);
+    wrefresh(janelaLogo);
+    refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
+    getch();   // espera entrada do usuário
+    endwin();  // finaliza o modo curses.
 
-  return 0;
-
+    return 0;
 }
+
+
