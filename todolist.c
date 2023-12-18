@@ -10,15 +10,15 @@ Data do Término:
 
   Para compilar e executar vá até o diretório correspondente e digite:
 
-  gcc teste.c -o testes.x -lncurses
-  ./testes.x
-*/
+    "make"
 
+  "./testes.x"
+*/
 
 int main()
 {
 
-    int xmaxstdscr, ymaxstdscr;
+    int xmaxstdscr, ymaxstdscr, escolha, contadorDeMenu = 0;
 
     initscr(); // inicia o modo curses
     cbreak();  // teclas de controle geram sinais de interrupção, diferente do raw() onde elas n geram.
@@ -29,23 +29,62 @@ int main()
     box(janelaEscolhas, 0, 0);
     refresh();
 
-    WINDOW *janelaLogo = newwin(7,50,(ymaxstdscr / 8),(xmaxstdscr / 2.6));
+    WINDOW *janelaLogo = newwin(7, 50, (ymaxstdscr / 8), (xmaxstdscr / 2.6));
     refresh();
 
-    wprintw(janelaLogo, logoMenu);
-    mvwprintw(janelaEscolhas, 1, 1, "Sign up");
-    mvwprintw(janelaEscolhas, 2, 1, "Sign in");
-    mvwprintw(janelaEscolhas, 3, 1, "About the project");
-    mvwprintw(stdscr, (ymaxstdscr - 2), (xmaxstdscr / 18), "Exit");
-    mvwprintw(stdscr, (ymaxstdscr - 2), (xmaxstdscr / 1.3), "Made by: Gabriel Santana and Natanael Lima");
+    keypad(janelaEscolhas, true);
 
-    wrefresh(janelaEscolhas);
-    wrefresh(janelaLogo);
-    refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
-    getch();   // espera entrada do usuário
+    
+    
+        wprintw(janelaLogo, logoMenu);
+        mvwprintw(janelaEscolhas, 1, 1, "Sign up");
+        mvwprintw(janelaEscolhas, 2, 1, "Sign in");
+        mvwprintw(janelaEscolhas, 3, 1, "About the project");
+        mvwprintw(stdscr, (ymaxstdscr - 2), (xmaxstdscr / 18), "Exit");
+        mvwprintw(stdscr, (ymaxstdscr - 2), (xmaxstdscr / 1.3), "Made by: Gabriel Santana and Natanael Lima");
+        wrefresh(janelaEscolhas);
+        wrefresh(janelaLogo);
+
+      /*  escolha = wgetch(janelaEscolhas);
+
+        while(1)
+        {
+        switch(escolha)
+        {
+            case KEY_UP:
+                contadorDeMenu++;
+                if(contadorDeMenu > 2)
+                {
+                    contadorDeMenu--;
+                }
+                break;
+
+            case KEY_DOWN:
+                contadorDeMenu--;
+                if(contadorDeMenu < 0)                    verificar o funcionamento dessa parte novamente.
+                {
+                    contadorDeMenu++;
+                }
+                break;
+
+            default:
+
+                break;
+
+            if(contadorDeMenu == 10)
+            {
+                break; //aparentemente 10 = enter
+            }
+        }
+
+        mvwprintw(stdscr, 10, 10, "Contador: %d", contadorDeMenu);
+        }
+        */
+        refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
+        getch();   // espera entrada do usuário
+
+    
     endwin();  // finaliza o modo curses.
 
     return 0;
 }
-
-
