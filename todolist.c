@@ -67,17 +67,22 @@ int main()
                 }
                 break;
 
+              case KEY_ENTER:
+
+                break;
+
             default:
 
                 break;
 
             if(contadorDeMenu == 10)
             {
-                break; //aparentemente 10 = enter
+                break; //aparentemente 10 = enter (errado)
             }
         }
 
         mvwprintw(stdscr, 10, 10, "Contador: %d", contadorDeMenu);
+        refresh();
         }
         */
         refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
