@@ -1,2 +1,7 @@
+#ifndef LOGOS_H
+#define LOGOS_H
+
+// Declarando constantes como extern
 extern const char *logoMenu;
-extern const char *logoMenu2;
+
+#endif // LOGOS_H
