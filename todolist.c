@@ -12,7 +12,7 @@ Data do Término:
 
     "make"
 
-  "./testes.x"
+  "./todolist.x"
 */
 
 int main()
@@ -32,7 +32,7 @@ int main()
     WINDOW *janelaLogo = newwin(7, 50, (ymaxstdscr / 8), (xmaxstdscr / 2.6));
     refresh();
 
-    keypad(janelaEscolhas, true);
+    keypad(janelaEscolhas, true); //inicia as teclas do teclado.
 
     wprintw(janelaLogo, logoMenu);
     mvwprintw(janelaEscolhas, 1, 4, "Sign up");
