@@ -18,14 +18,14 @@ Data do Término:
 int main()
 {
 
-    int xmaxstdscr, ymaxstdscr, escolha, contadorDeMenu = 0;
+    int xmaxstdscr, ymaxstdscr, escolha, contadorDeMenu = 1;
 
     initscr(); // inicia o modo curses
     cbreak();  // teclas de controle geram sinais de interrupção, diferente do raw() onde elas n geram.
     noecho();
     getmaxyx(stdscr, ymaxstdscr, xmaxstdscr);
 
-    WINDOW *janelaEscolhas = newwin(5, 22, (ymaxstdscr / 2.1), (xmaxstdscr / 2.3)); // newwin(altura,largura (colunas), coordenada y em relação a stdscr, coordenada x em relaçãoa stdscr)
+    WINDOW *janelaEscolhas = newwin(5, 24, (ymaxstdscr / 2.1), (xmaxstdscr / 2.3)); // newwin(altura,largura (colunas), coordenada y em relação a stdscr, coordenada x em relaçãoa stdscr)
     box(janelaEscolhas, 0, 0);
     refresh();
 
@@ -34,62 +34,62 @@ int main()
 
     keypad(janelaEscolhas, true);
 
+    wprintw(janelaLogo, logoMenu);
+    mvwprintw(janelaEscolhas, 1, 4, "Sign up");
+    mvwprintw(janelaEscolhas, 2, 4, "Sign in");
+    mvwprintw(janelaEscolhas, 3, 4, "About the project");
+    mvwprintw(stdscr, (ymaxstdscr - 2), (xmaxstdscr / 18), "Exit");
+    mvwprintw(stdscr, (ymaxstdscr - 2), (xmaxstdscr / 1.3), "Made by: Gabriel Santana and Natanael Lima");
+
+    wrefresh(janelaEscolhas);
+    wrefresh(janelaLogo);
+    refresh();
     
-    
-        wprintw(janelaLogo, logoMenu);
-        mvwprintw(janelaEscolhas, 1, 1, "Sign up");
-        mvwprintw(janelaEscolhas, 2, 1, "Sign in");
-        mvwprintw(janelaEscolhas, 3, 1, "About the project");
-        mvwprintw(stdscr, (ymaxstdscr - 2), (xmaxstdscr / 18), "Exit");
-        mvwprintw(stdscr, (ymaxstdscr - 2), (xmaxstdscr / 1.3), "Made by: Gabriel Santana and Natanael Lima");
-        wrefresh(janelaEscolhas);
-        wrefresh(janelaLogo);
+    mvwprintw(janelaEscolhas, contadorDeMenu, 2,"->"); //posiciona a seta no inicio
+    wrefresh(janelaEscolhas);
 
-      /*  escolha = wgetch(janelaEscolhas);
+    while (1)
+    {
+        escolha = wgetch(janelaEscolhas);
 
-        while(1)
+        switch (escolha)
         {
-        switch(escolha)
-        {
-            case KEY_UP:
-                contadorDeMenu++;
-                if(contadorDeMenu > 2)
-                {
-                    contadorDeMenu--;
-                }
-                break;
-
-            case KEY_DOWN:
-                contadorDeMenu--;
-                if(contadorDeMenu < 0)                    verificar o funcionamento dessa parte novamente.
-                {
-                    contadorDeMenu++;
-                }
-                break;
-
-              case KEY_ENTER:
-
-                break;
-
-            default:
-
-                break;
-
-            if(contadorDeMenu == 10)
+        case KEY_DOWN:
+            mvwprintw(janelaEscolhas, contadorDeMenu, 2, "  "); //apaga a seta
+            contadorDeMenu++;
+            if (contadorDeMenu > 3)
             {
-                break; //aparentemente 10 = enter (errado)
+                contadorDeMenu = 1;
             }
-        }
+            break;;
 
-        mvwprintw(stdscr, 10, 10, "Contador: %d", contadorDeMenu);
-        refresh();
-        }
+        case KEY_UP:
+            mvwprintw(janelaEscolhas, contadorDeMenu, 2, "  "); //apaga a seta
+            contadorDeMenu--;
+            if (contadorDeMenu < 1)
+            {
+                contadorDeMenu = 3;
+            }
+            break;
+
+        /*case KEY_ENTER:
+
+            break;
         */
-        refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
-        getch();   // espera entrada do usuário
+        default:
+            mvprintw(stdscr, 20, 10, "Tecla errada bro");
+            wrefresh(stdscr);
+            continue;
+        }
 
-    
-    endwin();  // finaliza o modo curses.
+        mvwprintw(janelaEscolhas, contadorDeMenu, 2,"->");
+        wrefresh(janelaEscolhas);
+    }
+
+    refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
+    getch();   // espera entrada do usuário
+
+    endwin(); // finaliza o modo curses.
 
     return 0;
 }
