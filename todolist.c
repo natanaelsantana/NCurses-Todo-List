@@ -2,6 +2,7 @@
 #include "stdlib.h"
 #include "ncurses.h"
 #include "Logos.h"
+#include "MenuFunctions.h"
 
 /*
 Projeto feito por: Gabriel Santana e Natanael Lima
@@ -22,7 +23,7 @@ int menu(int xmaxstdscr, int ymaxstdscr, WINDOW *janelaEscolhas, WINDOW *janelaL
 
     keypad(janelaEscolhas, true); // inicia as teclas do teclado.
 
-    wprintw(janelaLogo, logoMenu);
+    wprintw(janelaLogo, "%s", logoMenu);
     mvwprintw(janelaEscolhas, 1, 4, "Sign up");
     mvwprintw(janelaEscolhas, 2, 4, "Sign in");
     mvwprintw(janelaEscolhas, 3, 4, "About the project");
@@ -84,7 +85,10 @@ int menu(int xmaxstdscr, int ymaxstdscr, WINDOW *janelaEscolhas, WINDOW *janelaL
                 wrefresh(stdscr);
                 break;
             case 3:
-                mvwprintw(stdscr, 10, 10, "opcao 3 escolhida.");
+                //mvwprintw(stdscr, 10, 10, "opcao 3 escolhida.");
+                werase(janelaLogo);
+                werase(janelaEscolhas);
+                AboutTheProject();
                 wrefresh(stdscr);
                 break;
             case 4:
