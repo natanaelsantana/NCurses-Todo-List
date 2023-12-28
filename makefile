@@ -19,3 +19,4 @@ $(TARGET): $(SRCS)
 # Regra para limpar os arquivos gerados
 clean:
 	rm -f $(TARGET)
+
