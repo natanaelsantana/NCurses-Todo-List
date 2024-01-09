@@ -67,7 +67,7 @@ void AboutTheProject()
     //box(janelaTendencia, 0,0);
     refresh();
 
-    WINDOW *janelaLogoAbt = newwin(15, 100, (ymaxstdscr / 8), (xmaxstdscr / 2.5));
+    WINDOW *janelaLogoAbt = newwin(15, 100, (ymaxstdscr / 8), (xmaxstdscr / 3));
     refresh();
 
     for (int i = 0; i < 12; i++)
