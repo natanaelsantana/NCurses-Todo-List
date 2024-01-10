@@ -48,7 +48,7 @@ int menu(int xmaxstdscr, int ymaxstdscr, WINDOW *janelaEscolhas, WINDOW *janelaL
             contadorDeMenu++;
             if (contadorDeMenu > 4)
             {
-                contadorDeMenu = 1;
+                contadorDeMenu = 1; //pula a seta para o inicio do menu
             }
             break;
             
@@ -58,11 +58,11 @@ int menu(int xmaxstdscr, int ymaxstdscr, WINDOW *janelaEscolhas, WINDOW *janelaL
             contadorDeMenu--;
             if (contadorDeMenu < 1)
             {
-                contadorDeMenu = 4;
+                contadorDeMenu = 4; //pula a seta pro final do menu
             }
             break;
 
-        case 10:
+        case 10: //10 = enter
             return contadorDeMenu;
             break;
         }
@@ -86,8 +86,8 @@ int menu(int xmaxstdscr, int ymaxstdscr, WINDOW *janelaEscolhas, WINDOW *janelaL
                 break;
             case 3:
                 //mvwprintw(stdscr, 10, 10, "opcao 3 escolhida.");
-                werase(janelaLogo);
-                werase(janelaEscolhas);
+                wclear(stdscr);
+                wrefresh(stdscr);
                 AboutTheProject();
                 wrefresh(stdscr);
                 break;
