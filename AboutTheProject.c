@@ -55,19 +55,20 @@ void AboutTheProject()
 
     getmaxyx(stdscr, ymaxstdscr, xmaxstdscr);
 
-    WINDOW *janelaGravidade = newwin(15, 54, (ymaxstdscr/2), (xmaxstdscr / 20));
-    //box(janelaGravidade, 0, 0);
+    WINDOW *janelaGravidade = newwin(18, 54, (ymaxstdscr/2), (xmaxstdscr / 20.5));
+    box(janelaGravidade, 0, 0);
     refresh();
 
-    WINDOW *janelaUrgencia = newwin(14,64, (ymaxstdscr/2), (xmaxstdscr/3));
-    //box(janelaUrgencia,0,0);
+    WINDOW *janelaUrgencia = newwin(18,64, (ymaxstdscr/2), (xmaxstdscr/3));
+    box(janelaUrgencia,0,0);
     refresh();
 
-    WINDOW *janelaTendencia= newwin(14,60, (ymaxstdscr/2), (xmaxstdscr/1.5));
-    //box(janelaTendencia, 0,0);
+    WINDOW *janelaTendencia= newwin(18,61, (ymaxstdscr/2), (xmaxstdscr/1.49));
+    box(janelaTendencia, 0,0);
     refresh();
 
-    WINDOW *janelaLogoAbt = newwin(15, 100, (ymaxstdscr / 8), (xmaxstdscr / 3));
+    WINDOW *janelaLogoAbt = newwin(9, 90, (ymaxstdscr / 8), (xmaxstdscr / 3.5));
+    box(janelaLogoAbt, 0, 0);
     refresh();
 
     for (int i = 0; i < 12; i++)
