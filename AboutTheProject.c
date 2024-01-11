@@ -95,6 +95,14 @@ void AboutTheProject()
     wrefresh(janelaTendencia);
     wrefresh(stdscr);
     getch();
+    wclear(janelaLogoAbt);
+    wclear(janelaGravidade);
+    wclear(janelaTendencia);
+    wclear(janelaUrgencia);
+    wrefresh(janelaLogoAbt);
+    wrefresh(janelaGravidade);
+    wrefresh(janelaUrgencia);
+    wrefresh(janelaTendencia);
     endwin();
 
     
