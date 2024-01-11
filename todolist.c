@@ -48,55 +48,61 @@ int menu(int xmaxstdscr, int ymaxstdscr, WINDOW *janelaEscolhas, WINDOW *janelaL
             contadorDeMenu++;
             if (contadorDeMenu > 4)
             {
-                contadorDeMenu = 1; //pula a seta para o inicio do menu
+                contadorDeMenu = 1; // pula a seta para o inicio do menu
             }
             break;
-            
 
         case KEY_UP:
             mvwprintw(janelaEscolhas, contadorDeMenu, 2, "  "); // apaga a seta
             contadorDeMenu--;
             if (contadorDeMenu < 1)
             {
-                contadorDeMenu = 4; //pula a seta pro final do menu
+                contadorDeMenu = 4; // pula a seta pro final do menu
             }
             break;
 
-        case 10: //10 = enter
+        case 10: // 10 = enter
+            for (int i = 1; i < 4; i++)
+            {
+                mvwprintw(janelaEscolhas, i, 2, "  "); // apaga a seta quando acha a funcao (tava bugando)
+            }
             return contadorDeMenu;
             break;
         }
 
-        mvwprintw(janelaEscolhas, contadorDeMenu, 2, "->");
+        mvwprintw(janelaEscolhas, contadorDeMenu, 2, "->"); // printa a seta no menu
         wrefresh(janelaEscolhas);
     }
 }
 
-    void funcoes(int retorno, WINDOW *janelaEscolhas, WINDOW *janelaLogo)
+void funcoes(int retorno, WINDOW *janelaEscolhas, WINDOW *janelaLogo)
+{
+    switch (retorno)
     {
-        switch(retorno)
-        {
-            case 1:
-                mvwprintw(stdscr, 10, 10, "opcao 1 escolhida.");
-                wrefresh(stdscr);
-                break;
-            case 2:
-                mvwprintw(stdscr, 10, 10, "opcao 2 escolhida.");
-                wrefresh(stdscr);
-                break;
-            case 3:
-                //mvwprintw(stdscr, 10, 10, "opcao 3 escolhida.");
-                wclear(stdscr);
-                wrefresh(stdscr);
-                AboutTheProject();
-                wrefresh(stdscr);
-                break;
-            case 4:
-                endwin();
-                exit(0);
-                break;  
-        }
+    case 1:
+        mvwprintw(stdscr, 10, 10, "opcao 1 escolhida.");
+        wrefresh(stdscr);
+        break;
+    case 2:
+        mvwprintw(stdscr, 10, 10, "opcao 2 escolhida.");
+        wrefresh(stdscr);
+        break;
+    case 3:
+        // mvwprintw(stdscr, 10, 10, "opcao 3 escolhida.");
+        wclear(stdscr);
+        wclear(janelaLogo);
+        wrefresh(stdscr);
+        wrefresh(janelaLogo);
+        AboutTheProject();
+        box(janelaEscolhas, 0, 0); // recria a caixa que esta sendo deletada apos a funcao about the project
+        wrefresh(janelaEscolhas);
+        break;
+    case 4:
+        endwin();
+        exit(0);
+        break;
     }
+}
 
 int main()
 {
@@ -115,8 +121,11 @@ int main()
     WINDOW *janelaLogo = newwin(7, 50, (ymaxstdscr / 8), (xmaxstdscr / 2.6));
     refresh();
 
-    retorno = menu(xmaxstdscr, ymaxstdscr, janelaEscolhas, janelaLogo);
-    funcoes(retorno, janelaEscolhas, janelaLogo);
+    do
+    {
+        retorno = menu(xmaxstdscr, ymaxstdscr, janelaEscolhas, janelaLogo);
+        funcoes(retorno, janelaEscolhas, janelaLogo);
+    } while (1);
 
     refresh(); // passa as informações que estavam no stdscr para a tela de fato (altera somente as atualizações)
     getch();   // espera entrada do usuário
