@@ -35,7 +35,7 @@ void cadastro()
     user.senha[i] = '\0';
 
     mvprintw(12,10,"Login: %s\n", user.login);
-    printw("Senha: %s\n", user.senha);
+    mvprintw(13,10,"Senha: %s\n", user.senha);
     refresh();
 
 }
