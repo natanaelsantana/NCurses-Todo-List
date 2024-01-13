@@ -28,9 +28,18 @@ void cadastro()
     mvprintw(11,10,"senha:");
     for(i = 0; (ch = getch()) != '\n' && i < sizeof(user.senha) - 1; i++)
     {
+        if(ch > 32 && ch < 126)
+        {
         user.senha[i] = ch;
         printw("*");
         refresh();
+        }
+        else if (i != 0)
+        {
+            user.senha[i--] = ' ';
+            mvprintw(11,10 + i, " ");
+        }
+        
     }    
     user.senha[i] = '\0';
 
@@ -40,7 +49,7 @@ void cadastro()
 
 }
 
-int main(){
+int mainCadastro(){
 
     initscr(); //inicia o modo curses
     noecho();
