@@ -80,7 +80,12 @@ void funcoes(int retorno, WINDOW *janelaEscolhas, WINDOW *janelaLogo)
     switch (retorno)
     {
     case 1:
-        mvwprintw(stdscr, 10, 10, "opcao 1 escolhida.");
+        wclear(stdscr);
+        wclear(janelaLogo);
+        wrefresh(stdscr);
+        wrefresh(janelaLogo);
+        Register();
+        box(janelaEscolhas, 0, 0); // recria a caixa que esta sendo deletada apos a funcao register
         wrefresh(stdscr);
         break;
     case 2:
