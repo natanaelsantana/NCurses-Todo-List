@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "stdlib.h"
 #include "ncurses.h"
 #include "Logos.h"
 
@@ -16,6 +17,8 @@ void cadastro(WINDOW *janelaLogo, WINDOW *janelaLogin)
     int ch, i = 0;
     struct user user; //declara a variavel user do tipo struct user
 
+    keypad(stdscr,true);
+
     box(janelaLogin,0,0);
 
     wprintw(janelaLogo, "%s", logoMenu);
@@ -26,14 +29,29 @@ void cadastro(WINDOW *janelaLogo, WINDOW *janelaLogin)
     wrefresh(janelaLogin);
     refresh();
 
-    for(i = 0; (ch = getch()) != '\n'  && i < sizeof(user.login) - 1; i++)
+    for (i = 0; (ch = getch()) != '\n' && i < sizeof(user.login) - 1;)
     {
-        user.login[i] = ch;
-        wprintw(janelaLogin,"%c", ch);
-        wrefresh(janelaLogin);
-        refresh();
+        if (ch == KEY_BACKSPACE)
+        {
+            if (i > 0)
+            {
+                i--;
+                mvwprintw(janelaLogin, 1, 7 + i, " ");
+                wrefresh(janelaLogin);
+                refresh();
+                mvwprintw(janelaLogin, 10, 10 + i, " ");
+                wrefresh(janelaLogin);
+                refresh(); //tentar entender o caractere remanescente
+            }
+        }
+        else
+        {
+            user.login[i] = ch;
+            wprintw(janelaLogin, "%c", ch);
+            wrefresh(janelaLogin);
+            i++;
+        }
     }
-
     user.login[i] = '\0'; //terminação no final da string login
 
     mvwprintw(janelaLogin,2,1,"senha:");
@@ -59,11 +77,11 @@ void cadastro(WINDOW *janelaLogo, WINDOW *janelaLogin)
         
     user.senha[i] = '\0';
     
-/*
+
     mvprintw(12,10,"Login: %s\n", user.login);
     mvprintw(13,10,"Senha: %s\n", user.senha);
-    refresh();                                    prova real
-*/
+    refresh();                                    
+
 }
 
 int Register(){
