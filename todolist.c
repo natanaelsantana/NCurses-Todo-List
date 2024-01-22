@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include "ncurses.h"
+#include <ncurses/ncurses.h>
 #include "Logos.h"
 #include "MenuFunctions.h"
 

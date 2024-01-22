@@ -10,11 +10,11 @@ CC = gcc
 CFLAGS = -Wall
 
 # Lista de arquivos fonte
-SRCS = todolist.c Logos.c AboutTheProject.c Register.c
+SRCS = Register.c todolist.c Logos.c  AboutTheProject.c 
 
 # Regra principal: compilar o programa
 $(TARGET): $(SRCS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) -lncurses
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) -lncurses -DNCURSES_STATIC 
 
 # Regra para limpar os arquivos gerados
 clean:

@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include "ncurses.h"
+#include <ncurses/ncurses.h>
 #include "Logos.h"
 
 
@@ -84,7 +84,7 @@ void cadastro(WINDOW *janelaLogo, WINDOW *janelaLogin)
 
 }
 
-int Register(){
+int Register () {
 
     initscr(); //inicia o modo curses
     noecho();
