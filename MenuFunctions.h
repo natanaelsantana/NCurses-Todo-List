@@ -3,5 +3,6 @@
 
 // Declarando constantes como extern
 extern void AboutTheProject();
+extern void Register();
 
 #endif // MENUFUNCTIONS_H

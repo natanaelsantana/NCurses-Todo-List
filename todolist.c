@@ -23,7 +23,19 @@ int menu(int xmaxstdscr, int ymaxstdscr, WINDOW *janelaEscolhas, WINDOW *janelaL
 
     keypad(janelaEscolhas, true); // inicia as teclas do teclado.
 
+     start_color();
+
+    // Define pares de cores
+    init_pair(1, COLOR_BLUE, COLOR_BLACK);
+    init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+    wattron(janelaLogo, COLOR_PAIR(1));
+    wattron(janelaEscolhas, COLOR_PAIR(2));
+
+
+
     wprintw(janelaLogo, "%s", logoMenu);
+
+
     mvwprintw(janelaEscolhas, 1, 4, "Sign up");
     mvwprintw(janelaEscolhas, 2, 4, "Sign in");
     mvwprintw(janelaEscolhas, 3, 4, "About the project");
