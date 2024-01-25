@@ -23,7 +23,7 @@ int menu(int xmaxstdscr, int ymaxstdscr, WINDOW *janelaEscolhas, WINDOW *janelaL
 
     keypad(janelaEscolhas, true); // inicia as teclas do teclado.
 
-     start_color();
+    start_color();
 
     // Define pares de cores
     init_pair(1, COLOR_BLUE, COLOR_BLACK);
@@ -31,10 +31,7 @@ int menu(int xmaxstdscr, int ymaxstdscr, WINDOW *janelaEscolhas, WINDOW *janelaL
     wattron(janelaLogo, COLOR_PAIR(1));
     wattron(janelaEscolhas, COLOR_PAIR(2));
 
-
-
     wprintw(janelaLogo, "%s", logoMenu);
-
 
     mvwprintw(janelaEscolhas, 1, 4, "Sign up");
     mvwprintw(janelaEscolhas, 2, 4, "Sign in");
@@ -101,7 +98,12 @@ void funcoes(int retorno, WINDOW *janelaEscolhas, WINDOW *janelaLogo)
         wrefresh(stdscr);
         break;
     case 2:
-        mvwprintw(stdscr, 10, 10, "opcao 2 escolhida.");
+        wclear(stdscr);
+        wclear(janelaLogo);
+        wrefresh(stdscr);
+        wrefresh(janelaLogo);
+        Login();
+        box(janelaEscolhas, 0, 0); // recria a caixa que esta sendo deletada apos a funcao register
         wrefresh(stdscr);
         break;
     case 3:

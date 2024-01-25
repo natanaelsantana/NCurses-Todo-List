@@ -10,7 +10,7 @@ CC = gcc
 CFLAGS = -Wall
 
 # Lista de arquivos fonte
-SRCS = Register.c todolist.c Logos.c  AboutTheProject.c 
+SRCS = Register.c todolist.c Logos.c  AboutTheProject.c Login.c
 
 # Regra principal: compilar o programa
 $(TARGET): $(SRCS)
