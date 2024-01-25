@@ -3,14 +3,31 @@
 #include <ncurses/ncurses.h>
 #include "Logos.h"
 #include <ctype.h>
+#include <openssl/evp.h>
+#include <string.h>
+
+void encrypt(char senha[50], char hash[128])
+{
+    const unsigned char salt[] = "50"; // deve ser único para cada usuário
+    unsigned char temp_hash[64];
+
+    // A função PKCS5 pega a senha de entrada e usa o algoritmo contigo em EVP_sha256() para realizar o hash, que possui  tamanho de 64 bytes
+    if (!PKCS5_PBKDF2_HMAC(senha, strlen(senha), salt, strlen((char *)salt), 10000, EVP_sha256(), 64, temp_hash))
+    {
+        fprintf(stderr, "Erro ao criar o hash da senha\n");
+    }
+
+    for (int i = 0; i < 64; i++)
+    {
+        sprintf(&hash[i * 2], "%02x", temp_hash[i]);
+    }
+}
 
 typedef struct user
 {
-
     char login[50];
-    char senha[50];
+    char senha[128];
     // char hash[50]; estudar hash depois
-
 } user;
 
 struct user cadastro(WINDOW *janelaLogo, WINDOW *janelaLogin)
@@ -141,6 +158,8 @@ int Register()
         printf("erro ao abrir arquivo");
         return 0;
     }
+
+    encrypt(User.senha, User.senha);
 
     // Escreve o login e a senha no arquivo
     fprintf(arquivo, "Login: %s\n", User.login);

@@ -10,7 +10,7 @@ typedef struct user
 {
 
     char login[50];
-    char senha[50];
+    char senha[128];
     // char hash[50]; estudar hash depois
 
 } user;
@@ -68,6 +68,8 @@ void Login()
     refresh();
 
     struct user User = cadastro(janelaLogo, janelaLogin);
+
+    encrypt(User.senha, User.senha);
 
     if (verificar_login(&User))
     {

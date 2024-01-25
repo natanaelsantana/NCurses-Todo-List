@@ -14,7 +14,7 @@ SRCS = Register.c todolist.c Logos.c  AboutTheProject.c Login.c
 
 # Regra principal: compilar o programa
 $(TARGET): $(SRCS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) -lncurses -DNCURSES_STATIC 
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) -lncurses -DNCURSES_STATIC -lssl -lcrypto
 
 # Regra para limpar os arquivos gerados
 clean:
