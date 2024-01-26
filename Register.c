@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <openssl/evp.h>
 #include <string.h>
+#include "MenuFunctions.h"
 
 void encrypt(char senha[50], char hash[128])
 {
@@ -150,23 +151,9 @@ int Register()
 
     struct user User = cadastro(janelaLogo, janelaLogin);
 
-    // Aqui ficará a função que coloca os dados em um banco de Dados
-    FILE *arquivo = fopen("dados.txt", "w+");
-
-    if (arquivo == NULL)
-    {
-        printf("erro ao abrir arquivo");
-        return 0;
-    }
-
     encrypt(User.senha, User.senha);
 
-    // Escreve o login e a senha no arquivo
-    fprintf(arquivo, "Login: %s\n", User.login);
-    fprintf(arquivo, "Senha: %s\n", User.senha);
-
-    // Fecha o arquivo
-    fclose(arquivo);
+    inserirUsuario(User.login, User.senha);
 
     wclear(janelaLogin);
     wrefresh(janelaLogin);

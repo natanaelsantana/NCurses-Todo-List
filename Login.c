@@ -16,36 +16,6 @@ typedef struct user
 } user;
 
 // Função para verificar o login
-int verificar_login(user *usuario)
-{
-    user usuario_arquivo;
-
-    // Abre o arquivo para leitura
-    FILE *arquivo = fopen("dados.txt", "r");
-    if (arquivo == NULL)
-    {
-        printf("Erro ao abrir o arquivo!\n");
-        return 0;
-    }
-
-    // Lê o login e a senha do arquivo
-    fscanf(arquivo, "Login: %s\n", usuario_arquivo.login);
-    fscanf(arquivo, "Senha: %s\n", usuario_arquivo.senha);
-
-    // Fecha o arquivo
-    fclose(arquivo);
-
-    // Compara o login e a senha com os dados inseridos pelo usuário
-    if (strcmp(usuario->login, usuario_arquivo.login) == 0 &&
-        strcmp(usuario->senha, usuario_arquivo.senha) == 0)
-    {
-        return 1; // Login bem-sucedido
-    }
-    else
-    {
-        return 0; // Login falhou
-    }
-}
 
 void Login()
 {
@@ -71,7 +41,7 @@ void Login()
 
     encrypt(User.senha, User.senha);
 
-    if (verificar_login(&User))
+    if (procurarUsuario(User.login, User.senha))
     {
         mvprintw(14, 10, "Login bem-sucedido!\n");
     }
